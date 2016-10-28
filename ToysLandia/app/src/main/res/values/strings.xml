@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">ToysLandia</string>
+    <string name="title_activity_inicio">InicioActivity</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_scanner">ScannerActivity</string>
+    <string name="title_activity_mostrar_item">MostrarItemActivity</string>
+    <string name="title_activity_pedir_item">PedirItemActivity</string>
+</resources>
