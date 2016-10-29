@@ -1,4 +1,4 @@
-package com.example.equipo.musume.toyslandia;
+package mundo.toyslandia;
 
 import org.junit.Test;
 
