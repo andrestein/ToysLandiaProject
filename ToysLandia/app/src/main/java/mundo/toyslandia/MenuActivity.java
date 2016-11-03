@@ -1,5 +1,7 @@
 package mundo.toyslandia;
 
+import android.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,9 +14,19 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 public class MenuActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener , View.OnClickListener {
+
+    private Button scanBtn;
+    private TextView formatTxt, contentTxt;
+    private IntentResult scanning;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +52,8 @@ public class MenuActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        initComponents();
     }
 
     @Override
@@ -49,6 +63,30 @@ public class MenuActivity extends AppCompatActivity
             drawer.closeDrawer(GravityCompat.START);
         } else {
             super.onBackPressed();
+        }
+    }
+
+    private void initComponents() {
+        scanBtn = (Button)findViewById(R.id.btnScanear);
+        formatTxt = (TextView)findViewById(R.id.txtCod);
+        contentTxt = (TextView)findViewById(R.id.txtContent);
+        scanBtn.setOnClickListener(this);
+    }
+
+
+
+    public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+        scanning = scanningResult;
+        if (scanningResult != null) {
+            String scanContent = scanningResult.getContents();
+            String scanFormat = scanningResult.getFormatName();
+            formatTxt.setText("FORMAT: " + scanFormat);
+            contentTxt.setText("CONTENT: " + scanContent);
+        }else{
+            Toast toast = Toast.makeText(this,
+                    "No scan data received!", Toast.LENGTH_SHORT);
+            toast.show();
         }
     }
 
@@ -79,12 +117,12 @@ public class MenuActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
         int id = item.getItemId();
-        android.app.FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getFragmentManager();
 
         if (id == R.id.nav_scan_layout) {
             fragmentManager.beginTransaction()
-                    .replace(R.id.content_frame
-                            ,new ScanFragment())
+                    .replace(R.id.content_frame,
+                            new ScanFragment())
                     .commit();
         } else if (id == R.id.nav_mostrar_layout) {
             fragmentManager.beginTransaction()
@@ -101,5 +139,11 @@ public class MenuActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    @Override
+    public void onClick(View v) {
+        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
+        scanIntegrator.initiateScan();
     }
 }

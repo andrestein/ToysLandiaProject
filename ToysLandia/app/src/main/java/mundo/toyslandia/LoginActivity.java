@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import DataBase.DataBaseMananger;
+
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -16,7 +18,9 @@ public class LoginActivity extends AppCompatActivity {
     private AutoCompleteTextView txtSuc;
     private EditText txtPass;
     private Intent intento;
+    private DataBaseMananger mananger;
     public static String nomSuc,pass;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +36,8 @@ public class LoginActivity extends AppCompatActivity {
         txtSuc= (AutoCompleteTextView) findViewById(R.id.txtSuc);
         txtPass=(EditText)findViewById(R.id.password);
         intento = new Intent(this,MenuActivity.class);
+        mananger= new DataBaseMananger(this);
+
     }
 
     private void ingresar(){

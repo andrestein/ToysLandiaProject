@@ -10,4 +10,22 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="109dp" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnScanear"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/txtCod" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtCod"
+        android:layout_alignLeft="@+id/txtCod"
+        android:layout_alignStart="@+id/txtCod"
+        android:layout_marginTop="22dp"
+        android:id="@+id/txtContent" />
 </RelativeLayout>
