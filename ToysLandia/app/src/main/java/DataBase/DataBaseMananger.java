@@ -13,6 +13,10 @@ public class DataBaseMananger {
 
     private DbHelper helper;
     private SQLiteDatabase db;
+    public static final String SUCITEM="items sucursal";
+    public static final String NOM_SUC="nombre sucursal";
+    public static final String COD_ITE="codigo item";
+    public static final String STOCK="cantidad del item";
 
     public DataBaseMananger(Context context){
         helper = new DbHelper(context);
@@ -44,9 +48,9 @@ public class DataBaseMananger {
             "constraint FKSUC_ADM foreign key(ADM_SUC) references ADMINISTRADOR (COD_ADM)" +
             ")";
 
-    public static final String CREATE_SUCITEM="CREATE TABLE SUCITEM(" +
-            "NOM_SUC text," +
-            "COD_ITE text," +
+    public static final String CREATE_SUCITEM="CREATE TABLE SUCITEM (" +
+            "NOM_SUC  text not null," +
+            "COD_ITE text not null," +
             "STOCK integer not null," +
             "constraint PKSUCITEM primary key(NOM_SUC,COD_ITE)," +
             "constraint FKSUCITEM_SUC foreign key(NOM_SUC) references SUCURSAL(NOM_SUC)," +
@@ -55,4 +59,10 @@ public class DataBaseMananger {
 
     public static final String INSERT_BASEDATA="insert into ADMINISTRADOR values('1017247090','ANDRES','12345');" +
             "insert into SUCURSAL values('SANTA FE','1234','ANDRES');";
+
+    //Cursor para navegar
+    public Cursor cargarCursorProductos(){
+        String[] columnas={"NOM_SUC,COD_ITE"};
+        return db.query("SUCITEM",columnas,null,null,null,null,null);
+    }
 }

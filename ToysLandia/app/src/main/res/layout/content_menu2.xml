@@ -24,4 +24,14 @@
         android:layout_marginStart="100dp"
         android:layout_marginTop="61dp"
         android:id="@+id/btnAbrirScaner" />
+
+    <Button
+        android:text="Mostrar Items"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="36dp"
+        android:id="@+id/btnMostrar"
+        android:layout_below="@+id/btnAbrirScaner"
+        android:layout_alignLeft="@+id/btnAbrirScaner"
+        android:layout_alignStart="@+id/btnAbrirScaner" />
 </RelativeLayout>

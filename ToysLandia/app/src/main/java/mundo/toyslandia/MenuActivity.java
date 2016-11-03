@@ -11,7 +11,7 @@ import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button btnScan;
+    private Button btnScan, btnMostrar;
     private Intent intento;
 
     @Override
@@ -32,10 +32,13 @@ public class MenuActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         initComponents();
+        abrirActiviti();
+        mostrarLista();
     }
 
     private void initComponents(){
         btnScan= (Button) findViewById(R.id.btnAbrirScaner);
+        btnMostrar=(Button) findViewById(R.id.btnMostrar);
         intento = new Intent(this,ScanActivity.class);
     }
 
@@ -44,6 +47,16 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(intento);
+            }
+        });
+    }
+    //Metodo para cambiar a la Activity de Mostrar
+    private void mostrarLista(){
+        btnMostrar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent mostrarInte=new Intent(getApplicationContext(),MostrarActivity.class);
+                startActivity(mostrarInte);
             }
         });
     }
