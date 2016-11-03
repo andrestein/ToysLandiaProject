@@ -1,6 +1,7 @@
 package DataBase;
 
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
@@ -17,12 +18,11 @@ public class DataBaseMananger {
         helper = new DbHelper(context);
         db = helper.getWritableDatabase();
     }
-    /* Implementando el logeo
-    public Cursor cSucursalLogin(){
-        String[] columnas={"NOM_SUC","PAS_SUC","ADM_SUC"};
-        db.
+
+    public Cursor cSucursalLogin(String nomSuc,String pass){
+        return db.rawQuery("Select NOM_SUC,PAS_SUC FROM SUCURSAL WHERE NOM_SUC = 'SANTA FE' AND PAS_SUC='1234';",null);
     }
-    */
+
 
     public static final String CREATE_ADMINISTRADOR="CREATE TABLE ADMINISTRADOR(COD_ADM text," +
             " NOM_ADM text not null," +
