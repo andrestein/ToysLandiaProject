@@ -3,6 +3,9 @@ package DataBase;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
 
 /**
  * Created by LENOVO on 02/11/2016.
@@ -13,10 +16,11 @@ public class DataBaseMananger {
 
     private DbHelper helper;
     private SQLiteDatabase db;
+    /*cosas que flotan por el momento
     public static final String SUCITEM="items sucursal";
     public static final String NOM_SUC="nombre sucursal";
     public static final String COD_ITE="codigo item";
-    public static final String STOCK="cantidad del item";
+    public static final String STOCK="cantidad del item";*/
 
     public DataBaseMananger(Context context){
         helper = new DbHelper(context);
@@ -41,7 +45,7 @@ public class DataBaseMananger {
 
 
     public static final String CREATE_SUCURSAL="CREATE TABLE SUCURSAL(" +
-            "NOM_SUC text," +
+            "NOM_SUC text not null," +
             "PAS_SUC text not null," +
             "ADM_SUC text not null," +
             "constraint PKSUC primary key (NOM_SUC)," +
@@ -52,17 +56,35 @@ public class DataBaseMananger {
             "NOM_SUC  text not null," +
             "COD_ITE text not null," +
             "STOCK integer not null," +
-            "constraint PKSUCITEM primary key(NOM_SUC,COD_ITE)," +
+            "constraint PKSUCITEM primary key(NOM_SUC)," +
             "constraint FKSUCITEM_SUC foreign key(NOM_SUC) references SUCURSAL(NOM_SUC)," +
             "constraint FKSUCITEM_ITEM foreign key (COD_ITE) references ITEM (COD_ITE)" +
             ")";
 
     public static final String INSERT_BASEDATA="insert into ADMINISTRADOR values('1017247090','ANDRES','12345');" +
-            "insert into SUCURSAL values('SANTA FE','1234','ANDRES');";
+            "insert into SUCURSAL values('SANTA FE','1234','ANDRES');"+
+            "insert into SUCITEM values('SANTA FE',12004567,'2');";
 
-    //Cursor para navegar
-    public Cursor cargarCursorProductos(){
-        String[] columnas={"NOM_SUC,COD_ITE"};
-        return db.query("SUCITEM",columnas,null,null,null,null,null);
+    //Añadir los datos para navegar
+    //forma1
+    public ArrayList<String> cargarCursorProductos(){
+        ArrayList<String> lista=new ArrayList<>();
+        //String q="SELECT * FROM SUCITEM";
+        //SQLiteDatabase db1=helper.getReadableDatabase();
+        Cursor registros=db.rawQuery("SELECT * FROM SUCITEM",null);
+        if(registros.moveToFirst()){
+            do{
+                lista.add(registros.getString(0)+" "+registros.getString(1)+" "+registros.getInt(2));
+
+            }while(registros.moveToNext());
+        }else{
+            lista.add("nada");
+        }
+        return lista;
+    }
+    //forma 2
+    public Cursor cargarC(){
+        String[] columnas={"SELECT NOM_SUC FROM SUCITEM","SELECT COD_ITE FROM SUCITEM","SELECT STOCK FROM SUCITEM"};
+        return db.query("SELECT * FROM SUCITEM",columnas,null,null,null,null,null);
     }
 }
