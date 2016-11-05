@@ -26,9 +26,6 @@ public class DataBaseMananger {
         db = helper.getWritableDatabase();
     }
 
-    public void actualizarStock(){
-
-    }
     //Actualiza el stock
     public void actualizarStockItem(String nomSuc,String cod,int stock){
         db.update("SUCITEM",generarConSucI(nomSuc,cod,stock+cantidadStock(nomSuc,cod)),
@@ -58,7 +55,7 @@ public class DataBaseMananger {
         return val;
     }
     //Informa si existe el item
-    private boolean existeItem(String cod){
+    public boolean existeItem(String cod){
         ArrayList<String> lista=new ArrayList<>();
         Cursor registros;
         registros = db.rawQuery("SELECT * FROM SUCITEM WHERE COD_ITE='"+cod+"';",null);

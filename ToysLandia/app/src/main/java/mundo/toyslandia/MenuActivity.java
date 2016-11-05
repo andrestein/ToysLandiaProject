@@ -56,7 +56,6 @@ public class MenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 intento = new Intent(getApplicationContext(),ScanActivity.class);
-                intento = new Intent(getApplicationContext(),MenuActivity.class);
                 intento.putExtra("nombre",nomSuc+"");
                 intento.putExtra("pass",pass+"");
                 startActivity(intento);
