@@ -3,6 +3,10 @@ package DataBase;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+<<<<<<< HEAD
+=======
+import android.database.sqlite.SQLiteOpenHelper;
+>>>>>>> 7b91149ce12e7f4da67dd05f5ae8f42607c6d11d
 
 import java.util.ArrayList;
 
@@ -27,8 +31,12 @@ public class DataBaseMananger {
     }
 
     public Cursor cSucursalLogin(String nomSuc,String pass){
+<<<<<<< HEAD
         String[] columnas={"SELECT NOM_SUC FROM SUCURSAL","SELECT PAS_SUC FROM SUCURSAL"};
         return db.query("SELECT NOM_SUC,PAS_SUC FROM SUCURSAL",columnas,null,null,null,null,null);
+=======
+        return db.rawQuery("Select NOM_SUC,PAS_SUC FROM SUCURSAL WHERE NOM_SUC = 'SANTA FE' AND PAS_SUC='1234';",null);
+>>>>>>> 7b91149ce12e7f4da67dd05f5ae8f42607c6d11d
     }
 
 
