@@ -33,7 +33,7 @@ public class MenuActivity extends AppCompatActivity {
 
         initComponents();
         abrirActiviti();
-        mostrarLista();
+        //mostrarLista();
     }
 
     private void initComponents(){
@@ -51,6 +51,7 @@ public class MenuActivity extends AppCompatActivity {
         });
     }
     //Metodo para cambiar a la Activity de Mostrar
+    /*
     private void mostrarLista(){
         btnMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,5 +61,5 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
     }
-
+    */
 }

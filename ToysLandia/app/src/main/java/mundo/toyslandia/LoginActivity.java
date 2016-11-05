@@ -1,12 +1,15 @@
 package mundo.toyslandia;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import DataBase.DataBaseMananger;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -15,12 +18,14 @@ public class LoginActivity extends AppCompatActivity {
     private EditText txtPass,txtSuc;
     private Intent intento;
     public String nomSuc,pass;
+    private DataBaseMananger mananger;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mananger= new DataBaseMananger(this);
         initComponents();
 
         ingresar();
@@ -57,9 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private int existeSucursal(String suc,String pass){/*
+    private int existeSucursal(String suc,String pass){
         try {
-            final DataBaseMananger mananger= new DataBaseMananger(this);
             Cursor cursor = mananger.cSucursalLogin(suc, pass);
             if(cursor != null){
                 return 0;
@@ -68,8 +72,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }catch (Exception e) {
             return 2;
-        }*/
-        return 0;
+        }
     }
 }
 
