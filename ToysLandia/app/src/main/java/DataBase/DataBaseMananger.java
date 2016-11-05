@@ -1,5 +1,6 @@
 package DataBase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -25,9 +26,70 @@ public class DataBaseMananger {
         db = helper.getWritableDatabase();
     }
 
-    public Cursor cSucursalLogin(String nomSuc,String pass){
-        String[] columnas={"NOM_SUC","PAS_SUC"};
-        return db.query("SUCURSAL",columnas,null,null,null,null,null);
+    public void actualizarStock(){
+
+    }
+    //Actualiza el stock
+    public void actualizarStockItem(String nomSuc,String cod,int stock){
+        db.update("SUCITEM",generarConSucI(nomSuc,cod,stock+cantidadStock(nomSuc,cod)),
+                "NOM_SUC =? AND COD_ITE=?",new String[]{nomSuc,cod});
+    }
+    //Inserta un item
+    public void  insertarItem(String cod,String nom){
+        db.insert("ITEM",null,generarConItem(cod,nom));
+    }
+    //Genera el los values para insertar un item
+    private ContentValues generarConItem(String cod,String nom){
+        ContentValues val=new ContentValues();
+        val.put("COD_ITE",cod);
+        val.put("NOM_ITE",nom);
+        return val;
+    }
+    //Inserta un item en la SucItem
+    public void insertarSucITEM(String nom,String cod){
+        db.insert("SUCITEM",null,generarConSucI(nom,cod,1));
+    }
+    //Genera los values para generar los datos de los stocks
+    private ContentValues generarConSucI(String nom,String cod,int stock){
+        ContentValues val = new ContentValues();
+        val.put("NOM_SUC",nom);
+        val.put("COD_ITE",cod);
+        val.put("STOCK",stock);
+        return val;
+    }
+    //Informa si existe el item
+    private boolean existeItem(String cod){
+        ArrayList<String> lista=new ArrayList<>();
+        Cursor registros;
+        registros = db.rawQuery("SELECT * FROM SUCITEM WHERE COD_ITE='"+cod+"';",null);
+        if(registros.moveToFirst()){
+            do {
+                lista.add(registros.getString(0)+registros.getString(1)+registros.getInt(2));
+            }while (registros.moveToNext());
+        }
+        if(!lista.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
+    }
+    //Retorna la cantidad de un item
+    private int cantidadStock(String nomSuc,String cod){
+        Cursor registros;
+        registros = db.rawQuery("SELECT * FROM SUCITEM WHERE NOM_SUC='"+nomSuc+"' AND COD_ITE='"+cod+"';",null);
+        return Integer.parseInt(registros.getString(2));
+    }
+    //retorna un array de string de las suc
+    public ArrayList<String> cSucursalLogin(String nomSuc,String pass){
+        ArrayList<String> lista=new ArrayList<>();
+        Cursor registros;
+        registros = db.rawQuery("SELECT * FROM SUCURSAL WHERE NOM_SUC='"+nomSuc+"' AND PAS_SUC='"+pass+"';",null);
+        if(registros.moveToFirst()){
+            do {
+                lista.add(registros.getString(0));
+            }while (registros.moveToNext());
+        }
+        return lista;
     }
 
 
@@ -41,7 +103,6 @@ public class DataBaseMananger {
             "NOM_ITE text not null," +
             "constraint PKITEM primary key(COD_ITE)" +
             ")";
-
 
     public static final String CREATE_SUCURSAL="CREATE TABLE SUCURSAL(" +
             "NOM_SUC text not null," +
@@ -81,6 +142,9 @@ public class DataBaseMananger {
         }
         return lista;
     }
+
+
+
     //forma 2
     public Cursor cargarC(){
         String[] columnas={"SELECT NOM_SUC FROM SUCITEM","SELECT COD_ITE FROM SUCITEM","SELECT STOCK FROM SUCITEM"};

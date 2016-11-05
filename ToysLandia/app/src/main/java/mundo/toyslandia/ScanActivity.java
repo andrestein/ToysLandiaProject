@@ -14,11 +14,15 @@ import android.widget.Toast;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
+import DataBase.DataBaseMananger;
+
 public class ScanActivity extends AppCompatActivity implements View.OnClickListener{
 
     private Button scanBtn;
     private TextView formatTxt, contentTxt;
+    private String nomSuc,pass;
     private IntentResult scanning;
+    private DataBaseMananger mananger;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +40,7 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        mananger= new DataBaseMananger(this);
         initComponents();
     }
     private void initComponents() {
@@ -43,6 +48,12 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
         formatTxt = (TextView)findViewById(R.id.scan_format);
         contentTxt = (TextView)findViewById(R.id.scan_content);
         scanBtn.setOnClickListener(this);
+        Intent intent=getIntent();
+        Bundle extras =intent.getExtras();
+        if (extras != null) {
+            nomSuc=(String)extras.get("nombre");
+            pass= (String) extras.get("pass");
+        }
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -51,6 +62,7 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
         if (scanningResult != null) {
             String scanContent = scanningResult.getContents();
             String scanFormat = scanningResult.getFormatName();
+
             formatTxt.setText("FORMAT: " + scanFormat);
             contentTxt.setText("CONTENT: " + scanContent);
         }else{

@@ -12,7 +12,10 @@ import android.widget.Button;
 public class MenuActivity extends AppCompatActivity {
 
     private Button btnScan, btnMostrar;
+    private String nomSuc;
+    private String pass;
     private Intent intento;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,13 +42,23 @@ public class MenuActivity extends AppCompatActivity {
     private void initComponents(){
         btnScan= (Button) findViewById(R.id.btnAbrirScaner);
         btnMostrar=(Button) findViewById(R.id.btnMostrar);
-        intento = new Intent(this,ScanActivity.class);
+        Intent intent=getIntent();
+        Bundle extras =intent.getExtras();
+        if (extras != null) {
+            nomSuc=(String)extras.get("nombre");
+            pass= (String) extras.get("pass");
+        }
+
     }
 
     private void abrirActiviti(){
         btnScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                intento = new Intent(getApplicationContext(),ScanActivity.class);
+                intento = new Intent(getApplicationContext(),MenuActivity.class);
+                intento.putExtra("nombre",nomSuc+"");
+                intento.putExtra("pass",pass+"");
                 startActivity(intento);
             }
         });
