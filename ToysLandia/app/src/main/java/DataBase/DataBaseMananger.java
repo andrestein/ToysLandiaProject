@@ -26,6 +26,17 @@ public class DataBaseMananger {
         db = helper.getWritableDatabase();
     }
 
+    public  ArrayList<String> existeAdministrador(String nomAdm,String pass){
+        ArrayList<String> lista=new ArrayList<>();
+        Cursor registros;
+        registros = db.rawQuery("SELECT * FROM ADMINISTRADOR WHERE NOM_ADM='"+nomAdm+"' AND PAS_ADM='"+pass+"';",null);
+        if(registros.moveToFirst()){
+            do {
+                lista.add(registros.getString(0));
+            }while (registros.moveToNext());
+        }
+        return lista;
+    }
     //Actualiza el stock
     public void actualizarStockItem(String nomSuc,String cod,int stock){
         db.update("SUCITEM",generarConSucI(nomSuc,cod,stock+cantidadStock(nomSuc,cod)),

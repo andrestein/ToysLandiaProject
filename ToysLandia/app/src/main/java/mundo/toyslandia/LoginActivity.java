@@ -34,9 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         btnIniciarSuc =(Button)findViewById(R.id.btnIniciarSuc);
         txtSuc= (EditText) findViewById(R.id.txtSuc);
         txtPass=(EditText) findViewById(R.id.txtPassSuc);
-
-
-
     }
 
     private void ingresar(){

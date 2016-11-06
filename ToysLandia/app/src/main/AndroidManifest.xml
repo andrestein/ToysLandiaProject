@@ -52,6 +52,24 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mundo.toyslandia.ScanActivity" />
         </activity>
+        <activity
+            android:name=".LoginPedir"
+            android:label="@string/title_activity_login_pedir"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mundo.toyslandia.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".PedirActivity"
+            android:label="@string/title_activity_pedir"
+            android:parentActivityName=".LoginPedir"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mundo.toyslandia.LoginPedir" />
+        </activity>
     </application>
 
 </manifest>
