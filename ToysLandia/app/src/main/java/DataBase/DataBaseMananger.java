@@ -118,9 +118,10 @@ public class DataBaseMananger {
             "constraint FKSUCITEM_ITEM foreign key (COD_ITE) references ITEM (COD_ITE)" +
             ")";
 
-    public static final String INSERT_BASEDATA="insert into ADMINISTRADOR values('1017247090','ANDRES','12345');" +
-            "insert into SUCURSAL values('SANTA FE','1234','ANDRES');"+
-            "insert into SUCITEM values('SANTA FE',12004567,'2');";
+    public static final String INSERT_BASEDATA1="insert into ADMINISTRADOR values('1017247090','ANDRES','12345');";
+    public static final String INSERT_BASEDATA2="insert into SUCURSAL values('MEDELLIN','1234','ANDRES');";
+    public static final String INSERT_BASEDATA3="insert into SUCITEM values('SANTA FE',12004567,'2');";
+    public static final String INSERT_BASEDATA4="insert into ITEM values('12004567','BATMAN');";
 
     //Añadir los datos para navegar
     //forma1
