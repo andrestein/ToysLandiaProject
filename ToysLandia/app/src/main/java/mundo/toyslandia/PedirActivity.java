@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class PedirActivity extends AppCompatActivity {
 
@@ -43,7 +44,12 @@ public class PedirActivity extends AppCompatActivity {
         btnPedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                if(txtPedido.getText().toString() != ""){
+                    txtPedido.setText("");
+                    Toast.makeText(getBaseContext(),"Tu pedido ha sido enviado",Toast.LENGTH_SHORT);
+                }else {
+                    Toast.makeText(getBaseContext(),"Debes ingresar un pedido",Toast.LENGTH_SHORT);
+                }
             }
         });
     }
