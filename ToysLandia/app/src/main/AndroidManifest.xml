@@ -6,6 +6,8 @@
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -40,7 +42,34 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="mundo.toyslandia.MenuActivity" />
         </activity>
-        <activity android:name=".MostrarActivity"></activity>
+        <!-- <activity android:name=".MostrarActivity"></activity> -->
+        <activity
+            android:name=".nuevoItem"
+            android:label="@string/title_activity_nuevo_item"
+            android:parentActivityName=".ScanActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mundo.toyslandia.ScanActivity" />
+        </activity>
+        <activity
+            android:name=".LoginPedir"
+            android:label="@string/title_activity_login_pedir"
+            android:parentActivityName=".MenuActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mundo.toyslandia.MenuActivity" />
+        </activity>
+        <activity
+            android:name=".PedirActivity"
+            android:label="@string/title_activity_pedir"
+            android:parentActivityName=".LoginPedir"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="mundo.toyslandia.LoginPedir" />
+        </activity>
     </application>
 
 </manifest>

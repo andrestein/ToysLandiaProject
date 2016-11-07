@@ -8,21 +8,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import DataBase.DataBaseMananger;
+
 
 public class LoginActivity extends AppCompatActivity {
 
     private Button btnIniciarSuc;
     private EditText txtPass,txtSuc;
     private Intent intento;
-    public String nomSuc,pass;
+    private String nomSuc ,pass;
+    private DataBaseMananger mananger;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        mananger= new DataBaseMananger(this);
         initComponents();
-
         ingresar();
 
     }
@@ -31,9 +34,6 @@ public class LoginActivity extends AppCompatActivity {
         btnIniciarSuc =(Button)findViewById(R.id.btnIniciarSuc);
         txtSuc= (EditText) findViewById(R.id.txtSuc);
         txtPass=(EditText) findViewById(R.id.txtPassSuc);
-        intento = new Intent(this,MenuActivity.class);
-
-
     }
 
     private void ingresar(){
@@ -45,31 +45,26 @@ public class LoginActivity extends AppCompatActivity {
                 if(txtSuc.getText().toString().equals("") || txtPass.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Debes ingresar todos los datos",Toast.LENGTH_SHORT).show();
                 }else {
-                    if (existeSucursal(nomSuc,pass) == 0){
+                    if (existeSucursal(nomSuc,pass) == true){
+                        intento = new Intent(getApplicationContext(),MenuActivity.class);
+                        intento.putExtra("nombre",nomSuc+"");
+                        intento.putExtra("pass",pass+"");
                         startActivity(intento);
-                    }else if(existeSucursal(nomSuc,pass)==1){
-                        Toast.makeText(getApplicationContext(),"La sucursal no existe",Toast.LENGTH_SHORT).show();
                     }else{
-                        Toast.makeText(getApplicationContext(), "No se pudo conectar con la base de datos", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"La sucursal no existe",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
         });
     }
 
-    private int existeSucursal(String suc,String pass){/*
-        try {
-            final DataBaseMananger mananger= new DataBaseMananger(this);
-            Cursor cursor = mananger.cSucursalLogin(suc, pass);
-            if(cursor != null){
-                return 0;
-            }else {
-                return 1;
-            }
-        }catch (Exception e) {
-            return 2;
-        }*/
-        return 0;
+    private boolean existeSucursal(String suc,String pass){
+        String nom= mananger.cSucursalLogin(suc,pass).get(0);
+        if(!nom.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
 

@@ -23,7 +23,10 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(DataBaseMananger.CREATE_ITEM);
         db.execSQL(DataBaseMananger.CREATE_SUCURSAL);
         db.execSQL(DataBaseMananger.CREATE_SUCITEM);
-        db.execSQL(DataBaseMananger.INSERT_BASEDATA);
+        db.execSQL(DataBaseMananger.INSERT_BASEDATA1);
+        db.execSQL(DataBaseMananger.INSERT_BASEDATA2);
+        db.execSQL(DataBaseMananger.INSERT_BASEDATA3);
+        db.execSQL(DataBaseMananger.INSERT_BASEDATA4);
     }
 
     @Override
