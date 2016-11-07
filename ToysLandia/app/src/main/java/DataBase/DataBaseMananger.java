@@ -140,7 +140,7 @@ public class DataBaseMananger {
         ArrayList<String> lista=new ArrayList<>();
         //String q="SELECT * FROM SUCITEM";
         //SQLiteDatabase db1=helper.getReadableDatabase();
-        Cursor registros=db.rawQuery("SUCITEM",null);
+        Cursor registros=db.rawQuery("SELECT * FROM SUCITEM ",null);
         if(registros.moveToFirst()){
             do{
                 lista.add(registros.getString(0)+" "+registros.getString(1)+" "+registros.getInt(2));
