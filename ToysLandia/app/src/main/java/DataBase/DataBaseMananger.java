@@ -14,8 +14,8 @@ import java.util.ArrayList;
 public class DataBaseMananger {
 
 
-    private DbHelper helper;
-    private SQLiteDatabase db;
+    private static DbHelper helper;
+    private static SQLiteDatabase db;
     /*cosas que flotan por el momento
     public static final String SUCITEM="items sucursal";
     public static final String NOM_SUC="nombre sucursal";
@@ -67,18 +67,16 @@ public class DataBaseMananger {
 
     //Añadir los datos para navegar
     //forma1
-    public ArrayList<String> cargarCursorProductos(){
+    public static ArrayList<String> cargarCursorProductos(){
         ArrayList<String> lista=new ArrayList<>();
         //String q="SELECT * FROM SUCITEM";
         //SQLiteDatabase db1=helper.getReadableDatabase();
-        Cursor registros=db.rawQuery("SELECT * FROM SUCITEM",null);
+        Cursor registros=db.rawQuery("SUCITEM",null);
         if(registros.moveToFirst()){
             do{
                 lista.add(registros.getString(0)+" "+registros.getString(1)+" "+registros.getInt(2));
 
             }while(registros.moveToNext());
-        }else{
-            lista.add("nada");
         }
         return lista;
     }
