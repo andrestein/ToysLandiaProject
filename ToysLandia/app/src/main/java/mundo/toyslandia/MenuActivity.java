@@ -15,7 +15,7 @@ public class MenuActivity extends AppCompatActivity {
     private String nomSuc;
     private String pass;
     private Intent intento;
-
+ 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,20 +36,18 @@ public class MenuActivity extends AppCompatActivity {
 
         initComponents();
         abrirActiviti();
-        mostrarLista();
     }
 
     private void initComponents(){
         btnScan= (Button) findViewById(R.id.btnAbrirScaner);
         btnMostrar=(Button) findViewById(R.id.btnMostrar);
-        btnIngresarPedir=(Button) findViewById(R.id.btnIngresarPedir);
+        btnIngresarPedir=(Button) findViewById(R.id.btnIniciarPedir);
         Intent intent=getIntent();
         Bundle extras =intent.getExtras();
         if (extras != null) {
             nomSuc=(String)extras.get("nombre");
             pass= (String) extras.get("pass");
         }
-
     }
 
     private void abrirActiviti(){
@@ -62,7 +60,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intento);
             }
         });
-
         btnIngresarPedir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,10 +67,6 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intento);
             }
         });
-    }
-    //Metodo para cambiar a la Activity de Mostrar
-
-    private void mostrarLista(){
         btnMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

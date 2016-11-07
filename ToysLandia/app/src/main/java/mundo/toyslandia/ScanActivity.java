@@ -66,9 +66,9 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
             if(mananger.existeItem(scanContent)){
                 try {
                     mananger.actualizarStockItem(nomSuc, scanContent, 1);
-                    Toast.makeText(getApplicationContext(),"Los datos se actualizaron con exito",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Los datos se actualizaron con exito",Toast.LENGTH_LONG).show();;
                 }catch (Exception e){
-                    Toast.makeText(getApplicationContext(),"Ocurrio un problema al actualizar",Toast.LENGTH_LONG);
+                    Toast.makeText(getApplicationContext(),"Ocurrio un problema al actualizar",Toast.LENGTH_LONG).show();;
                 }
             }else{
                 AlertDialog.Builder builder =
@@ -94,9 +94,8 @@ public class ScanActivity extends AppCompatActivity implements View.OnClickListe
                 builder.create();
                 builder.show();
             }
-
-            formatTxt.setText("FORMAT: " + scanFormat);
-            contentTxt.setText("CONTENT: " + scanContent);
+            formatTxt.setText(scanFormat);
+            contentTxt.setText(scanContent);
         }else{
             Toast toast = Toast.makeText(getApplicationContext(),
                     "No scan data received!", Toast.LENGTH_SHORT);

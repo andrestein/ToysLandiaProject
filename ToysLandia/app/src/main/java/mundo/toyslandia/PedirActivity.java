@@ -46,9 +46,9 @@ public class PedirActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(txtPedido.getText().toString() != ""){
                     txtPedido.setText("");
-                    Toast.makeText(getBaseContext(),"Tu pedido ha sido enviado",Toast.LENGTH_SHORT);
+                    Toast.makeText(getBaseContext(),"Tu pedido ha sido enviado",Toast.LENGTH_SHORT).show();;
                 }else {
-                    Toast.makeText(getBaseContext(),"Debes ingresar un pedido",Toast.LENGTH_SHORT);
+                    Toast.makeText(getBaseContext(),"Debes ingresar un pedido",Toast.LENGTH_SHORT).show();;
                 }
             }
         });

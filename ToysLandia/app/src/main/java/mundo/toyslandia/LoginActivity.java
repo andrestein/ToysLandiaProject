@@ -45,13 +45,17 @@ public class LoginActivity extends AppCompatActivity {
                 if(txtSuc.getText().toString().equals("") || txtPass.getText().toString().equals("")){
                     Toast.makeText(getApplicationContext(),"Debes ingresar todos los datos",Toast.LENGTH_SHORT).show();
                 }else {
-                    if (existeSucursal(nomSuc,pass) == true){
-                        intento = new Intent(getApplicationContext(),MenuActivity.class);
-                        intento.putExtra("nombre",nomSuc+"");
-                        intento.putExtra("pass",pass+"");
-                        startActivity(intento);
-                    }else{
-                        Toast.makeText(getApplicationContext(),"La sucursal no existe",Toast.LENGTH_SHORT).show();
+                    try {
+                        if (existeSucursal(nomSuc, pass)) {
+                            intento = new Intent(getApplicationContext(), MenuActivity.class);
+                            intento.putExtra("nombre", nomSuc + "");
+                            intento.putExtra("pass", pass + "");
+                            startActivity(intento);
+                        } else {
+                            Toast.makeText(getApplicationContext(), "La sucursal no existe", Toast.LENGTH_SHORT).show();
+                        }
+                    }catch (Exception e){
+                        Toast.makeText(getApplicationContext(), "La sucursal no existe", Toast.LENGTH_SHORT).show();
                     }
                 }
             }

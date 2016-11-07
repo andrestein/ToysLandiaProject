@@ -124,7 +124,7 @@ public class DataBaseMananger {
             "NOM_SUC  text not null," +
             "COD_ITE text not null," +
             "STOCK integer not null," +
-            "constraint PKSUCITEM primary key(NOM_SUC)," +
+            "constraint PKSUCITEM primary key(NOM_SUC,COD_ITE)," +
             "constraint FKSUCITEM_SUC foreign key(NOM_SUC) references SUCURSAL(NOM_SUC)," +
             "constraint FKSUCITEM_ITEM foreign key (COD_ITE) references ITEM (COD_ITE)" +
             ")";

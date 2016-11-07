@@ -44,16 +44,16 @@ public class nuevoItem extends AppCompatActivity {
     }
 
     private void initComponents(){
+        txtCod=(TextView)findViewById(R.id.txtCodigo);
+        txtCod.setText(codigo);
+        nomItem=(EditText)findViewById(R.id.txtNomItem);
+        btnIngresar=(Button)findViewById(R.id.btnRegistrar);
         Intent intent=getIntent();
         Bundle extras =intent.getExtras();
         if (extras != null) {
             codigo=(String)extras.get("codigo");
             nomsuc=(String)extras.get("nomsuc");
         }
-        txtCod=(TextView)findViewById(R.id.txtCodigo);
-        txtCod.setText(codigo);
-        nomItem=(EditText)findViewById(R.id.txtNomItem);
-        btnIngresar=(Button)findViewById(R.id.btnRegistrar);
     }
 
     private void ingresar(){
@@ -65,12 +65,13 @@ public class nuevoItem extends AppCompatActivity {
                     try{
                         mananger.insertarItem(codigo,nombre);
                         mananger.insertarSucITEM(nomsuc,codigo);
-                        Toast.makeText(getApplicationContext(),"El item fue registrado con exito",Toast.LENGTH_SHORT);
+                        Toast.makeText(getApplicationContext(),"El item fue registrado con exito",Toast.LENGTH_SHORT).show();
+                        nomItem.setText("");
                     }catch (Exception e){
-                        Toast.makeText(getApplicationContext(),"No se pudo conectar con la base de datos",Toast.LENGTH_SHORT);
+                        Toast.makeText(getApplicationContext(),"No se pudo conectar con la base de datos",Toast.LENGTH_SHORT).show();
                     }
                 }else{
-                    Toast.makeText(getApplicationContext(),"Debes ingresar el nombre del item",Toast.LENGTH_SHORT);
+                    Toast.makeText(getApplicationContext(),"Debes ingresar el nombre del item",Toast.LENGTH_SHORT).show();
                 }
             }
         });
