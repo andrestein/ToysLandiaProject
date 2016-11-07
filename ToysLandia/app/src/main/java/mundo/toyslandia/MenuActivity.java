@@ -11,7 +11,7 @@ import android.widget.Button;
 
 public class MenuActivity extends AppCompatActivity {
 
-    private Button btnScan, btnMostrar;
+    private Button btnScan, btnMostrar,btnIngresarPedir;
     private String nomSuc;
     private String pass;
     private Intent intento;
@@ -36,12 +36,13 @@ public class MenuActivity extends AppCompatActivity {
 
         initComponents();
         abrirActiviti();
-        //mostrarLista();
+        mostrarLista();
     }
 
     private void initComponents(){
         btnScan= (Button) findViewById(R.id.btnAbrirScaner);
         btnMostrar=(Button) findViewById(R.id.btnMostrar);
+        btnIngresarPedir=(Button) findViewById(R.id.btnIngresarPedir);
         Intent intent=getIntent();
         Bundle extras =intent.getExtras();
         if (extras != null) {
@@ -61,9 +62,17 @@ public class MenuActivity extends AppCompatActivity {
                 startActivity(intento);
             }
         });
+
+        btnIngresarPedir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                intento = new Intent(getApplicationContext(),PedirActivity.class);
+                startActivity(intento);
+            }
+        });
     }
     //Metodo para cambiar a la Activity de Mostrar
-    /*
+
     private void mostrarLista(){
         btnMostrar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,5 +82,4 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
     }
-    */
 }

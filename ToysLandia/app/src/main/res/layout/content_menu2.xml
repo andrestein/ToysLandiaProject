@@ -34,4 +34,16 @@
         android:layout_below="@+id/btnAbrirScaner"
         android:layout_alignLeft="@+id/btnAbrirScaner"
         android:layout_alignStart="@+id/btnAbrirScaner" />
+
+    <Button
+        android:text="Pedir item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:id="@+id/btnIniciarPedir"
+        android:layout_below="@+id/btnMostrar"
+        android:layout_alignRight="@+id/btnMostrar"
+        android:layout_alignEnd="@+id/btnMostrar"
+        android:layout_alignLeft="@+id/btnMostrar"
+        android:layout_alignStart="@+id/btnMostrar" />
 </RelativeLayout>
