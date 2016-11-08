@@ -15,11 +15,7 @@ public class DataBaseMananger {
 
     private static DbHelper helper;
     private static SQLiteDatabase db;
-    /*cosas que flotan por el momento
-    public static final String SUCITEM="items sucursal";
-    public static final String NOM_SUC="nombre sucursal";
-    public static final String COD_ITE="codigo item";
-    public static final String STOCK="cantidad del item";*/
+
 
     public DataBaseMananger(Context context){
         helper = new DbHelper(context);
@@ -138,12 +134,11 @@ public class DataBaseMananger {
     //forma1
     public static ArrayList<String> cargarCursorProductos(){
         ArrayList<String> lista=new ArrayList<>();
-        //String q="SELECT * FROM SUCITEM";
-        //SQLiteDatabase db1=helper.getReadableDatabase();
+
         Cursor registros=db.rawQuery("SELECT * FROM SUCITEM ",null);
         if(registros.moveToFirst()){
             do{
-                lista.add(registros.getString(0)+" "+registros.getString(1)+" "+registros.getInt(2));
+                lista.add(registros.getString(0)+" "+registros.getString(1)+" "+registros.getString(2));
 
             }while(registros.moveToNext());
         }
@@ -152,9 +147,5 @@ public class DataBaseMananger {
 
 
 
-    //forma 2
-    public Cursor cargarC(){
-        String[] columnas={"SELECT NOM_SUC FROM SUCITEM","SELECT COD_ITE FROM SUCITEM","SELECT STOCK FROM SUCITEM"};
-        return db.query("SELECT * FROM SUCITEM",columnas,null,null,null,null,null);
-    }
+
 }
